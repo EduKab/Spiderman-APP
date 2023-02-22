@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practica1/widgets/loading_modal_widget.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -64,35 +65,40 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  opacity: .4,
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/fondo_spiderman.jpg'))),
-          child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Stack(alignment: Alignment.topCenter, children: [
-                Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-                  txtEmail,
-                  spaceHorizontal,
-                  txtPass,
-                  spaceHorizontal,
-                  btnEmail,
-                  spaceHorizontal,
-                  btnGoogle,
-                  spaceHorizontal,
-                  btnFacebook,
-                  spaceHorizontal,
-                  btnGitHub,
-                  spaceHorizontal,
-                  txtRegister
-                ]),
-                Positioned(
-                  child: imgLogo,
-                  top: 100,
-                )
-              ])),
+        body: Stack(
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      opacity: .4,
+                      fit: BoxFit.cover,
+                      image: AssetImage('assets/fondo_spiderman.jpg'))),
+              child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Stack(alignment: Alignment.topCenter, children: [
+                    Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+                      txtEmail,
+                      spaceHorizontal,
+                      txtPass,
+                      spaceHorizontal,
+                      btnEmail,
+                      spaceHorizontal,
+                      btnGoogle,
+                      spaceHorizontal,
+                      btnFacebook,
+                      spaceHorizontal,
+                      btnGitHub,
+                      spaceHorizontal,
+                      txtRegister
+                    ]),
+                    Positioned(
+                      child: imgLogo,
+                      top: 100,
+                    )
+                  ])),
+            ),
+            isLoading ? const LoadingModalWidget() : Container()
+          ],
         ));
   }
 }
