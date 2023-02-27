@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practica1/responsive.dart';
 import 'package:practica1/widgets/loading_modal_widget.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 
@@ -13,15 +14,19 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
 
   final txtEmail = const TextField(
-    decoration: InputDecoration(
-        label: Text("Email User"), border: OutlineInputBorder()),
-  );
+      decoration:
+          InputDecoration(label: Text("Email"), border: OutlineInputBorder()));
   final txtPass = const TextField(
     decoration: InputDecoration(
-        label: Text("Password User"), border: OutlineInputBorder()),
+        label: Text("Password"),
+        border:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.black))),
   );
   final spaceHorizontal = const SizedBox(
     height: 10,
+  );
+  final spaceBottomLogo = const SizedBox(
+    height: 50,
   );
 
   final btnGoogle = SocialLoginButton(
@@ -40,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
         onPressed: () {
           isLoading = true;
           setState(() {});
-          Future.delayed(Duration(milliseconds: 4000)).then((value) {
+          Future.delayed(const Duration(milliseconds: 4000)).then((value) {
             isLoading = false;
             setState(() {});
             Navigator.pushNamed(context, '/dash');
@@ -60,45 +65,193 @@ class _LoginScreenState extends State<LoginScreen> {
 
     final imgLogo = Image.asset(
       'assets/logo_spiderman.png',
-      height: 200,
+      height: 250,
+    );
+
+    final imgLogoWeb = Image.asset(
+      'assets/logo_spiderman.png',
+      height: 350,
     );
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
-            Container(
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      opacity: .4,
-                      fit: BoxFit.cover,
-                      image: AssetImage('assets/fondo_spiderman.jpg'))),
-              child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Stack(alignment: Alignment.topCenter, children: [
-                    Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-                      txtEmail,
-                      spaceHorizontal,
-                      txtPass,
-                      spaceHorizontal,
-                      btnEmail,
-                      spaceHorizontal,
-                      btnGoogle,
-                      spaceHorizontal,
-                      btnFacebook,
-                      spaceHorizontal,
-                      btnGitHub,
-                      spaceHorizontal,
-                      txtRegister
-                    ]),
-                    Positioned(
-                      child: imgLogo,
-                      top: 100,
-                    )
-                  ])),
+            Responsive(
+              mobile: MobileLoginScreen(
+                  txtEmail: txtEmail,
+                  spaceHorizontal: spaceHorizontal,
+                  spaceBottomLogo: spaceBottomLogo,
+                  txtPass: txtPass,
+                  btnEmail: btnEmail,
+                  btnGoogle: btnGoogle,
+                  btnFacebook: btnFacebook,
+                  btnGitHub: btnGitHub,
+                  txtRegister: txtRegister,
+                  imgLogo: imgLogo),
+              desktop: DesktopLoginScreen(
+                  imgLogoWeb: imgLogoWeb,
+                  txtEmail: txtEmail,
+                  spaceHorizontal: spaceHorizontal,
+                  txtPass: txtPass,
+                  btnEmail: btnEmail,
+                  btnGoogle: btnGoogle,
+                  btnFacebook: btnFacebook,
+                  btnGitHub: btnGitHub,
+                  txtRegister: txtRegister),
             ),
             isLoading ? const LoadingModalWidget() : Container()
           ],
         ));
+  }
+}
+
+class DesktopLoginScreen extends StatelessWidget {
+  const DesktopLoginScreen({
+    Key? key,
+    required this.imgLogoWeb,
+    required this.txtEmail,
+    required this.spaceHorizontal,
+    required this.txtPass,
+    required this.btnEmail,
+    required this.btnGoogle,
+    required this.btnFacebook,
+    required this.btnGitHub,
+    required this.txtRegister,
+  }) : super(key: key);
+
+  final Image imgLogoWeb;
+  final TextField txtEmail;
+  final SizedBox spaceHorizontal;
+  final TextField txtPass;
+  final SocialLoginButton btnEmail;
+  final SocialLoginButton btnGoogle;
+  final SocialLoginButton btnFacebook;
+  final SocialLoginButton btnGitHub;
+  final Padding txtRegister;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              opacity: .4,
+              fit: BoxFit.cover,
+              image: AssetImage('assets/fondo_spiderman.jpg'))),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 40),
+        child: Row(
+          children: [
+            Expanded(
+                child: Stack(alignment: Alignment.topCenter, children: [
+              Positioned(
+                top: 100,
+                child: imgLogoWeb,
+              )
+            ])),
+            Expanded(
+                child: ClipRect(
+                  child: 
+                    Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                    SizedBox(
+                        width: 450,
+                        child: Stack(alignment: Alignment.topCenter, children: [
+                          Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                txtEmail,
+                                spaceHorizontal,
+                                txtPass,
+                                spaceHorizontal,
+                                btnEmail,
+                                spaceHorizontal,
+                                btnGoogle,
+                                spaceHorizontal,
+                                btnFacebook,
+                                spaceHorizontal,
+                                btnGitHub,
+                                spaceHorizontal,
+                                txtRegister
+                              ]),
+                        ])),
+              ],
+            ),
+                  
+                ))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MobileLoginScreen extends StatelessWidget {
+  const MobileLoginScreen({
+    Key? key,
+    required this.txtEmail,
+    required this.spaceHorizontal,
+    required this.spaceBottomLogo,
+    required this.txtPass,
+    required this.btnEmail,
+    required this.btnGoogle,
+    required this.btnFacebook,
+    required this.btnGitHub,
+    required this.txtRegister,
+    required this.imgLogo,
+  }) : super(key: key);
+
+  final TextField txtEmail;
+  final SizedBox spaceHorizontal;
+  final SizedBox spaceBottomLogo;
+  final TextField txtPass;
+  final SocialLoginButton btnEmail;
+  final SocialLoginButton btnGoogle;
+  final SocialLoginButton btnFacebook;
+  final SocialLoginButton btnGitHub;
+  final Padding txtRegister;
+  final Image imgLogo;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  opacity: .4,
+                  fit: BoxFit.cover,
+                  image: AssetImage('assets/fondo_spiderman.jpg')))),
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+              child: SingleChildScrollView(
+                child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/logo_spiderman.png', height: 250),
+                    ],
+                  ),
+                  spaceBottomLogo,
+                  Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    txtEmail,
+                    spaceHorizontal,
+                    txtPass,
+                    spaceHorizontal,
+                    btnEmail,
+                    spaceHorizontal,
+                    btnGoogle,
+                    spaceHorizontal,
+                    btnFacebook,
+                    spaceHorizontal,
+                    btnGitHub,
+                    spaceHorizontal,
+                    txtRegister
+                  ]),
+                ]),
+              )),
+      ],
+    );
   }
 }

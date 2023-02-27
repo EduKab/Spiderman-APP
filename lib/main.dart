@@ -13,9 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider(context)),
       ],
-      child: PMSNApp(),
+      child: const PMSNApp(),
     );
   }
 }
@@ -27,8 +27,8 @@ class PMSNApp extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeProvider theme = Provider.of<ThemeProvider>(context);
     return MaterialApp(
-        theme: theme.getthemeData(), 
+        theme: theme.getThemeData(), 
         routes: getApplicationRoutes(), 
-        home: LoginScreen());
+        home: const LoginScreen());
   }
 }
