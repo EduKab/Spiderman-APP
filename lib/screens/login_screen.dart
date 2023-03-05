@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:practica1/responsive.dart';
 import 'package:practica1/widgets/loading_modal_widget.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
+import 'dart:ui' as ui;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -26,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
     height: 10,
   );
   final spaceBottomLogo = const SizedBox(
-    height: 50,
+    height: 30,
   );
 
   final btnGoogle = SocialLoginButton(
@@ -53,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
         });
 
     final txtRegister = Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: TextButton(
           onPressed: () {
             Navigator.pushNamed(context, '/register');
@@ -224,7 +225,7 @@ class MobileLoginScreen extends StatelessWidget {
                   fit: BoxFit.cover,
                   image: AssetImage('assets/fondo_spiderman.jpg')))),
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+              padding: const EdgeInsets.only(left: 20, right: 20, top:40),
               child: SingleChildScrollView(
                 child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Column(
@@ -234,21 +235,30 @@ class MobileLoginScreen extends StatelessWidget {
                     ],
                   ),
                   spaceBottomLogo,
-                  Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    txtEmail,
-                    spaceHorizontal,
-                    txtPass,
-                    spaceHorizontal,
-                    btnEmail,
-                    spaceHorizontal,
-                    btnGoogle,
-                    spaceHorizontal,
-                    btnFacebook,
-                    spaceHorizontal,
-                    btnGitHub,
-                    spaceHorizontal,
-                    txtRegister
-                  ]),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: BackdropFilter(
+                      filter: ui.ImageFilter.blur(sigmaX: 50, sigmaY: 50),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                          txtEmail,
+                          spaceHorizontal,
+                          txtPass,
+                          spaceHorizontal,
+                          btnEmail,
+                          spaceHorizontal,
+                          btnGoogle,
+                          spaceHorizontal,
+                          btnFacebook,
+                          spaceHorizontal,
+                          btnGitHub,
+                          spaceHorizontal,
+                          txtRegister
+                        ]),
+                      ),
+                    ),
+                  ),
                 ]),
               )),
       ],

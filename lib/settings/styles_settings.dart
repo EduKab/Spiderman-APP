@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-class StyleSettings {
-  static ThemeData lightTheme(BuildContext context) {
+class StyleSettings{
+
+  static ThemeData lightTheme(BuildContext context, Color color) {
     final theme = ThemeData.light();
     return theme.copyWith(colorScheme: Theme.of(context).colorScheme.copyWith(
-      primary: const Color.fromARGB(255, 9, 121, 9)
+      primary: color
     ));
   }
 

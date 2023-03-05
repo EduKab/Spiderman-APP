@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practica1/provider/theme_provider.dart';
 import 'package:practica1/routes.dart';
-import 'package:practica1/screens/login_screen.dart';
+import 'package:practica1/screens/board.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(const MyApp());
@@ -29,6 +29,9 @@ class PMSNApp extends StatelessWidget {
     return MaterialApp(
         theme: theme.getThemeData(), 
         routes: getApplicationRoutes(), 
-        home: const LoginScreen());
+        home: Board()
+    );
   }
 }
+
+

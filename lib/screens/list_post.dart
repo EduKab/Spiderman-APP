@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practica1/database/database_helper.dart';
+import 'package:practica1/models/post_model.dart';
 
 class ListPost extends StatefulWidget {
   const ListPost({super.key});

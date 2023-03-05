@@ -40,12 +40,19 @@ class _DashBoardScreenState extends State<DashboardScreen>{
               leading: Icon(Icons.settings),
               trailing: Icon(Icons.chevron_right),
             ),
+            ListTile(
+              title: const Text('Themes'),
+              subtitle: const Text('Change theme application'),
+              onTap: () {Navigator.pushNamed(context, '/theme');},
+              leading: const Icon(Icons.brush),
+              trailing: const Icon(Icons.chevron_right),
+            ),
             DayNightSwitcher( //Switch para cambiar el tema a blanco o oscuro.
               isDarkModeEnabled: isDarkModeEnabled,
               onStateChanged: (isDarkModeEnabled) {
                 isDarkModeEnabled
                     ? theme.setThemeData(StyleSettings.darkTheme(context))
-                    : theme.setThemeData(StyleSettings.lightTheme(context));
+                    : theme.setThemeData(StyleSettings.lightTheme(context, theme.color));
                 this.isDarkModeEnabled = isDarkModeEnabled;
 
                 setState(() {});
