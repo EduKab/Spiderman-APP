@@ -42,6 +42,7 @@ dependencies:
   sqflite: ^2.2.4+1
   image_picker: ^0.8.6+3
   email_validator: '^2.1.16'
+  passwordfield: ^0.1.0
   flutter_svg: ^1.1.6
   concentric_transition: ^1.0.3
   lottie: ^2.2.0

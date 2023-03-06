@@ -8,18 +8,26 @@ class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
   
   @override
-  State<DashboardScreen> createState() => _DashBoardScreenState();
+  State<DashboardScreen> createState() => DashBoardScreenState();
+
   
 }
 
-class _DashBoardScreenState extends State<DashboardScreen>{
+class DashBoardScreenState extends State<DashboardScreen>{
 
   bool isDarkModeEnabled = false;
+
+  setIsDarkModeEnabled(value){
+    isDarkModeEnabled = value;
+  }
 
   @override
   Widget build(BuildContext context) {
     ThemeProvider theme = Provider.of<ThemeProvider>(context);
 
+    setState(() {
+      
+    });
     return Scaffold(
       appBar: AppBar(
         title: const Text("TEC RED ;)"),

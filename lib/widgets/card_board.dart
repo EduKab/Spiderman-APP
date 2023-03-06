@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CardPlanetData{
+class CardBoardData{
   final String title;
   final String subtitle;
   final ImageProvider image;
@@ -9,7 +9,7 @@ class CardPlanetData{
   final Color subtitleColor;
   final Widget? background;
   
-  const CardPlanetData({
+  const CardBoardData({
     required this.title,
     required this.subtitle,
     required this.image,
@@ -20,10 +20,10 @@ class CardPlanetData{
   });
 }
 
-class CardPlanet extends StatelessWidget {
-  const CardPlanet({required this.data, Key? key}) : super(key: key);
+class CardBoard extends StatelessWidget {
+  const CardBoard({required this.data, Key? key}) : super(key: key);
 
-  final CardPlanetData data;
+  final CardBoardData data;
 
   @override
   Widget build(BuildContext context) {

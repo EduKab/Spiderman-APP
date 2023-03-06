@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:practica1/settings/styles_settings.dart';
 import 'package:practica1/widgets/image_picker_widget.dart';
 import 'package:practica1/widgets/loading_modal_widget.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
@@ -18,6 +17,8 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   bool isLoading = false;
   bool isEmailCorrect = false;
+  bool _isObscure = true;
+  bool _isObscPassConfirm = true;
   String userEmail = '';
   String userPassword = '';
 
@@ -107,9 +108,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
           }
         });
 
-    final txtRegiPassword = TextFormField(
-        decoration: const InputDecoration(
-            label: Text('Password'), border: OutlineInputBorder()),
+    
+    final tffPassword = TextFormField(
+        obscureText: _isObscure,
+        decoration:InputDecoration(
+            label: const Text('Password'), 
+            border: const OutlineInputBorder(),
+            suffixIcon: IconButton(
+              onPressed: (){
+                setState(() {
+                  _isObscure = !_isObscure;
+                });
+              }, 
+              icon: Icon(_isObscure ? Icons.visibility : Icons.visibility_off)
+            )
+        ),
         validator: ((value) {
           if (value!.isEmpty || value.length < 8) {
             return "Enter Correct Password Of 8 Digits";
@@ -119,9 +132,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
           }
         }));
 
-    final txtRegiPasswordConfirm = TextFormField(
-        decoration: const InputDecoration(
-            label: Text('Password Confirm'), border: OutlineInputBorder()),
+    final tffPassConfirm = TextFormField(
+        obscureText: _isObscPassConfirm,
+        decoration: InputDecoration(
+            label: const Text('Password Confirm'), 
+            border: const OutlineInputBorder(),
+            suffixIcon: IconButton(
+              onPressed: (){
+                setState(() {
+                  _isObscPassConfirm = !_isObscPassConfirm;
+                });
+              }, 
+              icon: Icon(_isObscPassConfirm ? Icons.visibility : Icons.visibility_off)
+            )
+        ),
         validator: (value) {
           if (userPassword != value) {
             return 'Passwords do not match';
@@ -131,7 +155,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         });
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
             Container(
@@ -141,7 +164,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         fit: BoxFit.cover,
                         image: AssetImage('assets/fondo_spiderman.jpg')))),
             Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 100),
+                    padding: const EdgeInsets.only(left: 20, right: 20, top: 100, bottom: 50),
                     child: SingleChildScrollView(
                       child: 
                         Form(
@@ -156,13 +179,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               spaceHorizontal,
                               txtRegiLastName,
                               spaceHorizontal,
-                              textField(),
+                              textFieldEmail(),
                               spaceHorizontal,
                               txtRegiEmailConfirm,
                               spaceHorizontal,
-                              txtRegiPassword,
+                              tffPassword,
                               spaceHorizontal,
-                              txtRegiPasswordConfirm,
+                              tffPassConfirm,
                               spaceHorizontal,
                               btnRegister
                             ],
@@ -175,14 +198,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  TextField textField() {
-    return TextField(
+  TextFormField textFieldEmail() {
+    return TextFormField(
       controller: textEditingController,
       onChanged: (val) {
         setState(() {
           isEmailCorrect = EmailValidator.validate(val);
           userEmail = val;
         });
+      },
+      validator: (val) {
+         if (isEmailCorrect == false) {
+            return 'Invalid Email';
+          } else {
+            return null;
+          }
       },
       decoration: InputDecoration(
           label: const Text('Email'),
