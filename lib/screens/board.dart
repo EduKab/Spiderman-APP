@@ -9,29 +9,32 @@ class Board extends StatelessWidget {
 
   final data = [
     CardBoardData(
-      title: "Collection",
-      subtitle: "The new app for Hot Wheels collection for all people",
+      title: "WELCOME",
+      subtitle: "The new app for Spiderman fans for chating, sharing and meet people with same likes and dislikes from our friendly friend Spiderman. :)",
       image: const AssetImage("assets/onBoarding/onBoarding1.png"),
-      backgroundColor: Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: Color.fromARGB(255, 17, 17, 17),
       titleColor: Color.fromARGB(255, 255, 255, 255),
       subtitleColor: Color.fromARGB(255, 130, 0, 0),
-      background: LottieBuilder.asset('assets/animations/onBoarding1.json')
+      //background: LottieBuilder.asset('assets/animations/onBoarding1.json')
+      background: 'assets/onBoarding/fondo1.jpg'
     ),
-    const CardBoardData(
-      title: "Cars",
-      subtitle: "Find all Hot Wheels Car to add in your collection.",
+    CardBoardData(
+      title: "CHAT",
+      subtitle: "Chating with your friends or another people of other countrys around the world.",
       image: AssetImage("assets/onBoarding/onBoarding2.png"),
-      backgroundColor: Color.fromRGBO(113, 113, 113, 1),
-      titleColor: Colors.red,
-      subtitleColor: Colors.white
+      backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+      titleColor: Color.fromARGB(255, 25, 20, 173),
+      subtitleColor: Color.fromARGB(255, 0, 0, 0),
+      background: 'assets/onBoarding/fondo2.jpg'
     ),
-    const CardBoardData(
-      title: "Hot wheels",
-      subtitle: "The best toy cars.",
+    CardBoardData(
+      title: "SHARE MEDIA",
+      subtitle: "Share all media that you want, photos, questions, experiences, jokes. The community always connected.",
       image: AssetImage("assets/onBoarding/onBoarding3.png"),
-      backgroundColor: Color.fromRGBO(23, 4, 111, 1),
+      backgroundColor: Color.fromRGBO(0, 0, 0, 1),
       titleColor: Color.fromARGB(255, 255, 17, 1),
-      subtitleColor: Colors.white
+      subtitleColor: Colors.white,
+      background: 'assets/onBoarding/fondo3.jpg'
     )
   ];
 

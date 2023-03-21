@@ -7,16 +7,16 @@ class CardBoardData{
   final Color backgroundColor;
   final Color titleColor;
   final Color subtitleColor;
-  final Widget? background;
+  String background;
   
-  const CardBoardData({
+  CardBoardData({
     required this.title,
     required this.subtitle,
     required this.image,
     required this.backgroundColor,
     required this.titleColor,
     required this.subtitleColor,
-    this.background
+    required this.background
   });
 }
 
@@ -29,41 +29,41 @@ class CardBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        if (data.background != null) data.background!,
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-          child: Column(
-            children: [
-              const Spacer(flex: 3),
-              Flexible(
-                flex: 20,
-                child: Image(image: data.image, height: 350, width: 350)
-              ),
-              const Spacer(flex: 1),
-              Text(
-                data.title.toUpperCase(),
-                style: TextStyle(
-                  color: data.titleColor,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1
+          padding: const EdgeInsets.all(30),
+            child: Column(
+              children: [
+                const Spacer(flex: 3),
+                Flexible(
+                  flex: 20,
+                  child: Image(image: data.image, height: 350, width: 350)
                 ),
-                maxLines: 1
-              ),
-              const Spacer(flex: 1),
-              Text(
-                data.subtitle,
-                style: TextStyle(
-                  color: data.subtitleColor,
-                  fontSize: 16
+                const Spacer(flex: 1),
+                Text(
+                  data.title.toUpperCase(),
+                  style: TextStyle(
+                    color: data.titleColor,
+                    fontFamily: 'Basketball',
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1
+                  ),
+                  maxLines: 1
                 ),
-                textAlign: TextAlign.center,
-                maxLines: 2
-              ),
-              const Spacer(flex: 10)
-            ],
+                const Spacer(flex: 1),
+                Text(
+                  data.subtitle,
+                  style: TextStyle(
+                    color: data.subtitleColor,
+                    fontSize: 20
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 4
+                ),
+                const Spacer(flex: 10)
+              ],
+            ),
           ),
-        ),
       ],
     );
   }

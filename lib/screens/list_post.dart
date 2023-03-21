@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practica1/database/database_helper.dart';
 import 'package:practica1/models/post_model.dart';
+import 'package:practica1/widgets/post_widget.dart';
 
 class ListPost extends StatefulWidget {
   const ListPost({super.key});
@@ -20,7 +21,8 @@ class _ListPostState extends State<ListPost> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return PostWidget();
+    /*return FutureBuilder(
         //future: databaseHelper!.GETALLPOST(),
         //  Hay que especificar el tipo de dato que recibiremos en snapshot para poder ingresar a los
         //  atributos del elemento que recuperemos.
@@ -32,7 +34,7 @@ class _ListPostState extends State<ListPost> {
           itemCount: snapshot.data!.length,
           itemBuilder: (context, index) {
           var objPostModel = snapshot.data![index];
-          return Container();
+          return PostWidget(objPostModel: objPostModel);
         });
       } else if (snapshot.hasError) {
         //Widget cuando sucedio un error.
@@ -41,6 +43,6 @@ class _ListPostState extends State<ListPost> {
         //Wideget cuando todavia esta buscando los datos, osea cargando.
         return const Center(child: CircularProgressIndicator());
       }
-    });
+    });*/
   }
 }

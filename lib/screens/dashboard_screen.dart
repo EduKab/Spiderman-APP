@@ -1,6 +1,7 @@
 import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:practica1/provider/theme_provider.dart';
+import 'package:practica1/screens/list_post.dart';
 import 'package:practica1/settings/styles_settings.dart';
 import 'package:provider/provider.dart';
 
@@ -31,6 +32,14 @@ class DashBoardScreenState extends State<DashboardScreen>{
     return Scaffold(
       appBar: AppBar(
         title: const Text("TEC RED ;)"),
+      ),
+      body: const ListPost(),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: (){
+          Navigator.pushNamed(context, '/add_post');
+        }, 
+        label: const Text('Add Post'),
+        icon: const Icon(Icons.add_comment),
       ),
       drawer: Drawer(
         child: ListView(
