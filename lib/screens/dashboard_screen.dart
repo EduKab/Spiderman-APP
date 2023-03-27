@@ -64,6 +64,18 @@ class DashBoardScreenState extends State<DashboardScreen>{
               leading: const Icon(Icons.brush),
               trailing: const Icon(Icons.chevron_right),
             ),
+            ListTile(
+              title: const Text('Events'),
+              subtitle: const Text('Show the events'),
+              onTap: () {Navigator.pushNamed(context, '/events');},
+              leading: const Icon(Icons.event),
+              trailing: const Icon(Icons.chevron_right),
+            ),
+            ListTile(
+              title: const Text('Api Videos'),
+              leading: const Icon(Icons.movie),
+              trailing: const Icon(Icons.chevron_right),
+            ),
             DayNightSwitcher( //Switch para cambiar el tema a blanco o oscuro.
               isDarkModeEnabled: isDarkModeEnabled,
               onStateChanged: (isDarkModeEnabled) {

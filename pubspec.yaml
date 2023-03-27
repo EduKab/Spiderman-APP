@@ -49,6 +49,8 @@ dependencies:
   flutter_colorpicker: ^1.0.3
   shared_preferences: ^2.0.18
   path_provider: ^2.0.13
+  syncfusion_flutter_calendar: ^21.1.35
+  calendar_date_picker2: ^0.4.9
 
 dev_dependencies:
   flutter_test:

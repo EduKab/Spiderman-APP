@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:practica1/models/event_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -7,7 +8,7 @@ import '../models/post_model.dart';
 class DatabaseHelper {
   
   static final nameDB = 'SOCIALDB';
-  static final versionDB = 1;
+  static final versionDB = 3;
 
   static Database? _database;
   Future<Database> get database async {
@@ -17,12 +18,13 @@ class DatabaseHelper {
 
   _initDatabase() async{
     Directory folder = await getApplicationDocumentsDirectory();
-    String pathDB = join(folder.path,nameDB);
+    String pathDB = join(folder.path, nameDB);
     return await openDatabase(
       pathDB,
       version: versionDB,
       onCreate: _createTables,
     );
+
   }
 
   _createTables(Database db, int version) async{
@@ -31,6 +33,21 @@ class DatabaseHelper {
       dscPost VARCHAR(200),
       datePost DATE
     )''';
+
+    String query2 = '''CREATE TABLE tblEvent (
+      idEvent INTEGER PRIMARY KEY,
+      nameEvent VARCHAR(50),
+      descEvent VARCHAR(200),
+      dateEvent DATE,
+      startEvent INTEGER,
+      endEvent INTEGER,
+      compEvent INTEGER
+    )''';
+
+    //final tables = db.rawQuery('SELECT * FROM sqlite_master ORDER BY name;');
+    //print('Tablas:');
+    //print(tables);
+    db.execute(query2);
     db.execute(query);
   }
 
@@ -53,10 +70,16 @@ class DatabaseHelper {
       whereArgs: [idPost]);
   }
 
-  Future<List<PostModel>> GETALLPOST() async {
+  Future<List<PostModel>> GetAllPost() async {
     var conexion = await database;
     var result = await conexion.query('tblPost');
     return result.map((post) => PostModel.fromMap(post)).toList();
+  }
+
+  Future<List<EventModel>> getAllEvent() async {
+    var conexion = await database;
+    var result = await conexion.query('tblEvent');
+    return result.map((event) => EventModel.fromMap(event)).toList();
   }
 
 }
