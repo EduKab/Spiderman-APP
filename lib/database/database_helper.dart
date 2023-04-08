@@ -8,7 +8,7 @@ import '../models/post_model.dart';
 class DatabaseHelper {
   
   static final nameDB = 'SOCIALDB';
-  static final versionDB = 3;
+  static final versionDB = 1;
 
   static Database? _database;
   Future<Database> get database async {

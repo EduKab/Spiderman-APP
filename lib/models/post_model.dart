@@ -14,8 +14,8 @@ class PostModel {
   factory PostModel.fromMap(Map<String,dynamic> map){
     return PostModel(
       idPost: map['idPost'],
-      descripcion: map['descripcion'],
-      date: map['date']
+      descripcion: map['dscPost'],
+      date: map['datePost']
     );
   }
 }

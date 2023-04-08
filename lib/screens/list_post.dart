@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:practica1/database/database_helper.dart';
 import 'package:practica1/models/post_model.dart';
-import 'package:practica1/widgets/post_widget.dart';
+import 'package:practica1/provider/flags_provider.dart';
+import 'package:practica1/widgets/item_post.dart';
+import 'package:provider/provider.dart';
 
 class ListPost extends StatefulWidget {
   const ListPost({super.key});
@@ -11,38 +13,36 @@ class ListPost extends StatefulWidget {
 }
 
 class _ListPostState extends State<ListPost> {
-  DatabaseHelper? databaseHelper;
+  DatabaseHelper? database;
 
   @override
   void initState() {
     super.initState();
-    databaseHelper = DatabaseHelper();
+    database = DatabaseHelper();
   }
 
   @override
   Widget build(BuildContext context) {
-    return PostWidget();
-    /*return FutureBuilder(
-        //future: databaseHelper!.GETALLPOST(),
-        //  Hay que especificar el tipo de dato que recibiremos en snapshot para poder ingresar a los
-        //  atributos del elemento que recuperemos.
-        builder: (context, AsyncSnapshot<List<PostModel>> snapshot) {
-      //  En este bloque se coloca las condiciones o ciclos que necesitemos.
-      if (snapshot.hasData) {
-        //Widget cuando ya encontro los datos.
-        return ListView.builder(
-          itemCount: snapshot.data!.length,
-          itemBuilder: (context, index) {
-          var objPostModel = snapshot.data![index];
-          return PostWidget(objPostModel: objPostModel);
-        });
-      } else if (snapshot.hasError) {
-        //Widget cuando sucedio un error.
-        return const Center(child: Text('Ocurrio un error :()'));
-      } else {
-        //Wideget cuando todavia esta buscando los datos, osea cargando.
-        return const Center(child: CircularProgressIndicator());
-      }
-    });*/
+
+    FlagsProvider flag = Provider.of<FlagsProvider>(context);
+
+    return FutureBuilder(
+      future: flag.getflagListPost() == true ? database!.GetAllPost() : database!.GetAllPost(),
+      builder: (context, AsyncSnapshot<List<PostModel>> snapshot) {
+        if(snapshot.hasData){
+          return ListView.builder(
+            itemCount: snapshot.data!.length,
+            itemBuilder: (context, index) {
+              var objPostModel = snapshot.data![index];
+              return ItemPost(objPostModel: objPostModel);
+            },
+          );
+        }else if( snapshot.hasError ){
+          return const Center(child: Text('Ocurrio un error :)'),);
+        }else{
+          return const Center(child: CircularProgressIndicator(),);
+        }
+      },
+    );
   }
 }

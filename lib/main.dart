@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practica1/provider/flags_provider.dart';
 import 'package:practica1/provider/theme_provider.dart';
 import 'package:practica1/routes.dart';
 import 'package:practica1/screens/board.dart';
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider(context)),
+        ChangeNotifierProvider(create: (_) => FlagsProvider())
       ],
       child: const PMSNApp(),
     );

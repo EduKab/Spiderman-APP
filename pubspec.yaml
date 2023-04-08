@@ -51,6 +51,9 @@ dependencies:
   path_provider: ^2.0.13
   syncfusion_flutter_calendar: ^21.1.35
   calendar_date_picker2: ^0.4.9
+  flutter_rating_bar: ^4.0.1
+  infinite_carousel: ^1.0.2
+  youtube_player_flutter: ^8.1.2
 
 dev_dependencies:
   flutter_test:

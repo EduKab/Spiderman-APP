@@ -1,0 +1,51 @@
+import 'package:flutter/material.dart';
+
+import '../models/popular_model.dart';
+import '../network/api_popular.dart';
+import '../widgets/item_popular.dart';
+
+class ListActor extends StatefulWidget {
+  const ListActor({super.key});
+
+  @override
+  State<ListActor> createState() => _ListActorState();
+}
+
+class _ListActorState extends State<ListActor> {
+
+  ApiPopular? apiPopular;
+
+  @override
+  void initState() {
+    super.initState();
+    apiPopular = ApiPopular();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: apiPopular!.getAllPopular(),
+        builder: (context, AsyncSnapshot<List<PopularModel>?> snapshot ) {
+          if( snapshot.hasData ){
+            return GridView.builder(
+              padding: EdgeInsets.all(10),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: .9,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10
+              ), 
+              itemCount: snapshot.data != null ? snapshot.data!.length : 0,
+              itemBuilder: (context, index) {
+                return ItemPopular(popularModel: snapshot.data![index]);
+              },
+            );
+          }else if( snapshot.hasError){
+            return const Center(child: Text('Ocurrio un error :()'),);
+          }else{
+            return const CircularProgressIndicator();
+          }
+        }
+    );
+  }
+}

@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:practica1/database/database_helper.dart';
+import 'package:provider/provider.dart';
+
+import '../models/post_model.dart';
+import '../provider/flags_provider.dart';
 
 class AddPostScreen extends StatelessWidget {
   AddPostScreen({super.key});
 
   DatabaseHelper database = DatabaseHelper();
+  PostModel? objPosmodel;
 
   @override
   Widget build(BuildContext context) {
     
+    FlagsProvider flag = Provider.of<FlagsProvider>(context);
     final txtContPost = TextEditingController();
+
+    if( ModalRoute.of(context)!.settings.arguments != null ){
+      objPosmodel = ModalRoute.of(context)!.settings.arguments as PostModel;
+      txtContPost.text = objPosmodel!.descripcion!;
+    }
 
     return Scaffold(
       body: Center(
@@ -24,25 +35,49 @@ class AddPostScreen extends StatelessWidget {
           child: Column(
             //mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('Add Post'),
+              objPosmodel == null 
+                ? const Text('Add Post :)') 
+                : const Text('Update Post :)'),
               TextFormField(
                 controller: txtContPost,
                 maxLines: 8
               ),
               ElevatedButton(
                 onPressed: (){
-                  database.INSERT('tblPost',{
-                    'dscPost' : DateTime.now().toString()
-                  }).then((value){
-                    var msg = value > 0 
-                      ? 'Register Insert'
-                      : 'Register Error';
+                  if( objPosmodel == null ){
+                    database.INSERT('tblPost',{
+                      'dscPost' : txtContPost.text,
+                      'datePost' : DateTime.now().toString()
+                    }).then((value){
+                      var msg = value > 0 
+                        ? 'Register Insert'
+                        : 'Register Error';
 
-                    var snackBar = SnackBar(content: Text(msg));
-                  
-                    Navigator.pop(context);
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  });
+                      var snackBar = SnackBar(content: Text(msg));
+                    
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    });
+                  }else{
+                    database.UPDATE('tblPost',{
+                      'idPost' : objPosmodel!.idPost,
+                      'dscPost' : txtContPost.text,
+                      'datePost' : DateTime.now().toString()
+                    }).then((value){
+
+                      var msg = value > 0 
+                        ? 'Registro actualizado' 
+                        : 'Ocurrió un error';
+
+                      var snackBar = SnackBar(
+                        content: Text(msg)
+                      );
+
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    });
+                  }
+                  flag.setflagListPost();
                 }, 
                 child: const Text('Save Post'))
             ],

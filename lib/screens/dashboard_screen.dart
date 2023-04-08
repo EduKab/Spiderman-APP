@@ -24,11 +24,9 @@ class DashBoardScreenState extends State<DashboardScreen>{
 
   @override
   Widget build(BuildContext context) {
+    
     ThemeProvider theme = Provider.of<ThemeProvider>(context);
 
-    setState(() {
-      
-    });
     return Scaffold(
       appBar: AppBar(
         title: const Text("TEC RED ;)"),
@@ -36,7 +34,9 @@ class DashBoardScreenState extends State<DashboardScreen>{
       body: const ListPost(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: (){
-          Navigator.pushNamed(context, '/add_post');
+          Navigator.pushNamed(context, '/add_post').then((value) {
+            setState(() {});
+          });
         }, 
         label: const Text('Add Post'),
         icon: const Icon(Icons.add_comment),
@@ -73,6 +73,8 @@ class DashBoardScreenState extends State<DashboardScreen>{
             ),
             ListTile(
               title: const Text('Api Videos'),
+              subtitle: const Text('Show the videos'),
+              onTap: () {Navigator.pushNamed(context, '/popular');},
               leading: const Icon(Icons.movie),
               trailing: const Icon(Icons.chevron_right),
             ),
