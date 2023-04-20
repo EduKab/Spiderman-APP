@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:practica1/models/credit_popular_model.dart';
 import 'package:practica1/network/api_popular.dart';
-import 'package:practica1/screens/list_actor.dart';
+import 'package:practica1/widgets/favorite_widget.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:infinite_carousel/infinite_carousel.dart';
 
-
+import '../database/database_helper.dart';
 import '../models/video_popular_model.dart';
 
 class DetailsMovie extends StatelessWidget {
   DetailsMovie({super.key, required this.id, required this.title, required this.raiting, required this.description, required this.release_date, required this.poster_path});
 
-  final String? id, title, description, release_date, poster_path;
+  final int id;
+  final String? title, description, release_date, poster_path;
   final double? raiting;
 
   ApiPopular? apiPopular = ApiPopular();
@@ -21,6 +21,18 @@ class DetailsMovie extends StatelessWidget {
   Widget build(BuildContext context) {
 
     print(id);
+    DatabaseHelper database = DatabaseHelper();
+    Future<bool> result = database.getFavorite(id);
+    bool isFavorite;
+    print(result);
+
+    if(result != []){
+      print('falso');
+      isFavorite = false;
+    }else{
+      print('verdadero');
+      isFavorite = true;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -40,7 +52,7 @@ class DetailsMovie extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  IconButton(onPressed: (){}, icon: const Icon(Icons.favorite_border, color: Colors.red, size: 30))
+                  FavoriteWidget(id, title!, isFavorite, poster_path!)
                 ],
               ),
               Padding(

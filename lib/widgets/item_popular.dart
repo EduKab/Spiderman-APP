@@ -16,7 +16,7 @@ class ItemPopular extends StatelessWidget {
         image: NetworkImage('https://image.tmdb.org/t/p/w500/${popularModel.posterPath}'),
       ),
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsMovie(id: popularModel.id.toString(), title: popularModel.originalTitle, raiting: popularModel.voteAverage, description: popularModel.overview, release_date: popularModel.releaseDate, poster_path: popularModel.posterPath)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsMovie(id: popularModel.id!, title: popularModel.originalTitle, raiting: popularModel.voteAverage, description: popularModel.overview, release_date: popularModel.releaseDate, poster_path: popularModel.posterPath)));
       },
     );
   }

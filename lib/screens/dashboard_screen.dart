@@ -78,6 +78,20 @@ class DashBoardScreenState extends State<DashboardScreen>{
               leading: const Icon(Icons.movie),
               trailing: const Icon(Icons.chevron_right),
             ),
+            ListTile(
+              title: const Text('Favorite Movies'),
+              subtitle: const Text('Show favorite movies'),
+              onTap: () {Navigator.pushNamed(context, '/favorites_movies');},
+              leading: const Icon(Icons.favorite),
+              trailing: const Icon(Icons.chevron_right),
+            ),
+            ListTile(
+              title: const Text('Marvel Characters'),
+              subtitle: const Text('Show marvel characters'),
+              onTap: () {Navigator.pushNamed(context, '/marvel_characters');},
+              leading: const Icon(Icons.spa_rounded),
+              trailing: const Icon(Icons.chevron_right),
+            ),
             DayNightSwitcher( //Switch para cambiar el tema a blanco o oscuro.
               isDarkModeEnabled: isDarkModeEnabled,
               onStateChanged: (isDarkModeEnabled) {
