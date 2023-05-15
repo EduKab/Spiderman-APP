@@ -17,7 +17,7 @@ class ItemMarvelEvent extends StatelessWidget {
           InstaImageViewer(
             child: Image(
               image: Image.network(
-                '${marvelEventModel.thumbnail_path}' + '.${marvelEventModel.thumbnail_extension}',
+                '${marvelEventModel.thumbnail_path}' '.${marvelEventModel.thumbnail_extension}',
               ).image,
             ),
           ),
@@ -25,23 +25,23 @@ class ItemMarvelEvent extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             child: Text(
               marvelEventModel.title.toString(),
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           StyledText(
             textAlign: TextAlign.center,
-            text: '<bold>START: </bold>' + '${marvelEventModel.start.toString()}',
+            text: '<bold>START: </bold> ${marvelEventModel.start}',
             tags: {
-              'bold': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold))
+              'bold': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold))
             }
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: StyledText(
               textAlign: TextAlign.center,
-              text: '<bold>END: </bold>' + '${marvelEventModel.end.toString()}',
+              text: '<bold>END: </bold> ${marvelEventModel.end}',
               tags: {
-                'bold': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold))
+                'bold': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold))
               }
             ),
           )

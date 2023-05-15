@@ -41,11 +41,11 @@ class DesktopListMarvelCharacterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: apiMarvel!.getAllCharacters(),
+      future: apiMarvel.getAllCharacters(),
       builder: (context, AsyncSnapshot<List<MarvelModel>?> snapshot ) {
         if( snapshot.hasData ){
           return GridView.builder(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 0.53,
@@ -75,11 +75,11 @@ class MobileListMarvelCharacterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: apiMarvel!.getAllCharacters(),
+      future: apiMarvel.getAllCharacters(),
       builder: (context, AsyncSnapshot<List<MarvelModel>?> snapshot ) {
         if( snapshot.hasData ){
           return GridView.builder(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 0.53,

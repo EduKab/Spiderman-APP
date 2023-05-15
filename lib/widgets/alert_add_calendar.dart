@@ -25,7 +25,7 @@ class _AlertAddCalendarState extends State<AlertAddCalendar> {
 
   final txtEvenStart = DropdownButtonFormField(items: null, onChanged: null, value: DateTime.now());
 
-  final String text = '' + DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day).toString();
+  final String text = '${DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day)}';
   
   final txtEvenEnd = DropdownButtonFormField(items: null, onChanged: null, decoration: const InputDecoration(labelText: ''));
 

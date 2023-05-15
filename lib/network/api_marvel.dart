@@ -20,7 +20,7 @@ class ApiMarvel{
   }
 
   Future<List<MarvelComicModel>?> getAllComics(int? idCharacter) async {
-    Uri link = Uri.parse('https://gateway.marvel.com:443/v1/public/characters/${idCharacter}/comics?limit=100&ts=spider&apikey=b5f22b68ecc17073749b5552108cd1b5&hash=08f58e5f5d29a6356c51fb76efbc52e9');
+    Uri link = Uri.parse('https://gateway.marvel.com:443/v1/public/characters/$idCharacter/comics?limit=100&ts=spider&apikey=b5f22b68ecc17073749b5552108cd1b5&hash=08f58e5f5d29a6356c51fb76efbc52e9');
 
     var result = await http.get(link);
     //print('GETALLCOMICS:');
@@ -33,7 +33,7 @@ class ApiMarvel{
   }
   
   Future<List<MarvelEventModel>?> getAllEvents(int? idCharacter) async {
-    Uri link = Uri.parse('https://gateway.marvel.com:443/v1/public/characters/${idCharacter}/events?limit=100&ts=spider&apikey=b5f22b68ecc17073749b5552108cd1b5&hash=08f58e5f5d29a6356c51fb76efbc52e9');
+    Uri link = Uri.parse('https://gateway.marvel.com:443/v1/public/characters/$idCharacter/events?limit=100&ts=spider&apikey=b5f22b68ecc17073749b5552108cd1b5&hash=08f58e5f5d29a6356c51fb76efbc52e9');
 
     var result = await http.get(link);
     //print('GETALLEVENTS:');

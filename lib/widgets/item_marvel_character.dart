@@ -1,10 +1,8 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:practica1/models/marvel_character_model.dart';
 import 'package:practica1/screens/details_marvel_character.dart';
-import '../screens/details_movie.dart';
 
 class ItemMarvelCharacter extends StatelessWidget {
   const ItemMarvelCharacter({super.key, required this.marvelModel});
@@ -40,7 +38,7 @@ class ItemMarvelCharacter extends StatelessWidget {
                               placeholder: const AssetImage('assets/loading.gif'), 
                               image: NetworkImage(
                                 marvelModel.thumbnail_path != null
-                                ? '${marvelModel.thumbnail_path}' + '.${marvelModel.thumbnail_extension}'
+                                ? '${marvelModel.thumbnail_path}' '.${marvelModel.thumbnail_extension}'
                                 : 'https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?fit=300%2C300'
                               ),
                             ),
@@ -90,7 +88,7 @@ class ItemMarvelCharacter extends StatelessWidget {
                         onPressed: (){
                           print('Marvel ID: ');
                           print(marvelModel.id);
-                          Navigator.push(context, PageTransition(duration: Duration(milliseconds: 300), type: PageTransitionType.leftToRight, child: DetailsMarvelCharacter(marvelModel: marvelModel)));
+                          Navigator.push(context, PageTransition(duration: const Duration(milliseconds: 300), type: PageTransitionType.leftToRight, child: DetailsMarvelCharacter(marvelModel: marvelModel)));
                         },
                         style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.black87), elevation: MaterialStatePropertyAll(1)), 
                         child: const Text('MORE DETAILS'),

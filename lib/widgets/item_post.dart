@@ -14,15 +14,15 @@ class ItemPost extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final avatar = CircleAvatar(
+    const avatar = CircleAvatar(
       backgroundImage: AssetImage('assets/user_default.jpg'));
-    final txtUser = Text('Edukab');
-    final datePost = Text('06-03-2023');
-    final imgPost = Image(
+    const txtUser = Text('Edukab');
+    const datePost = Text('06-03-2023');
+    const imgPost = Image(
       image: AssetImage('assets/onBoarding/onBoarding2.png'),
       height: 100);
     final txtDescription = Text(objPostModel!.descripcion!);
-    final iconRate = Icon(Icons.rate_review);
+    const iconRate = Icon(Icons.rate_review);
 
     FlagsProvider flag = Provider.of<FlagsProvider>(context);
     
@@ -36,7 +36,7 @@ class ItemPost extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Row(
+          const Row(
             children: [
               avatar,
               txtUser,
@@ -57,7 +57,7 @@ class ItemPost extends StatelessWidget {
                 onPressed: (){
                   Navigator.pushNamed(context, '/add_post', arguments: objPostModel);
                 }, 
-                icon: Icon(Icons.edit)
+                icon: const Icon(Icons.edit)
               ),
               IconButton(
                 onPressed: (){
@@ -84,7 +84,7 @@ class ItemPost extends StatelessWidget {
                     ),
                   );
                 }, 
-                icon: Icon(Icons.delete)
+                icon: const Icon(Icons.delete)
               )
             ],
           )

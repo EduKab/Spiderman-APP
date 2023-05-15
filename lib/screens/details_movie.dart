@@ -56,7 +56,7 @@ class DetailsMovie extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -64,7 +64,7 @@ class DetailsMovie extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(title!, style: TextStyle(fontFamily: 'Basketball', fontSize: 30))
+                          Text(title!, style: const TextStyle(fontFamily: 'Basketball', fontSize: 30))
                         ]
                       ),
                     )
@@ -72,7 +72,7 @@ class DetailsMovie extends StatelessWidget {
                 )
               ),
               Padding(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -96,12 +96,12 @@ class DetailsMovie extends StatelessWidget {
                   print(rating);
                 },
               ),
-              Text('Raiting: ${raiting!}', style: TextStyle(fontWeight: FontWeight.bold)),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+              Text('Raiting: ${raiting!}', style: const TextStyle(fontWeight: FontWeight.bold)),
+              const Padding(
+                padding: EdgeInsets.only(left: 20, right: 20, top: 20),
                 child:  Row(
                   children: [
-                    const Text('Description: ', style: TextStyle(fontWeight: FontWeight.bold))
+                    Text('Description: ', style: TextStyle(fontWeight: FontWeight.bold))
                   ],
                 ),
               ),
@@ -177,10 +177,10 @@ class DetailsMovie extends StatelessWidget {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child:  Row(
-                  children: const [
+                  children: [
                     Text('Credits:', style: TextStyle(fontWeight: FontWeight.bold),)
                   ],
                 ),
@@ -207,19 +207,19 @@ class DetailsMovie extends StatelessWidget {
                                       CircleAvatar(
                                         backgroundImage: snapshot.data![index].profile_path != null
                                         ? NetworkImage('https://image.tmdb.org/t/p/w500${snapshot.data![index].profile_path}')
-                                        : NetworkImage('https://th.bing.com/th/id/R.653f93c3cb58cb7f21b6a721ebdbec19?rik=wJggWmq6sjoy5w&riu=http%3a%2f%2fwww.4x4.ec%2foverlandecuador%2fwp-content%2fuploads%2f2017%2f06%2fdefault-user-icon-8.jpg&ehk=9fyAmt1RIymhvMctzqJXJMDodZfLHOkhYLUAIoBLYfs%3d&risl=&pid=ImgRaw&r=0')
+                                        : const NetworkImage('https://th.bing.com/th/id/R.653f93c3cb58cb7f21b6a721ebdbec19?rik=wJggWmq6sjoy5w&riu=http%3a%2f%2fwww.4x4.ec%2foverlandecuador%2fwp-content%2fuploads%2f2017%2f06%2fdefault-user-icon-8.jpg&ehk=9fyAmt1RIymhvMctzqJXJMDodZfLHOkhYLUAIoBLYfs%3d&risl=&pid=ImgRaw&r=0')
                                       )
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      Text('Name: ', style: TextStyle(fontWeight: FontWeight.bold)),
+                                      const Text('Name: ', style: TextStyle(fontWeight: FontWeight.bold)),
                                       Text(snapshot.data![index].original_name)
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      Text('Character: ', style: TextStyle(fontWeight: FontWeight.bold)),
+                                      const Text('Character: ', style: TextStyle(fontWeight: FontWeight.bold)),
                                       Text(snapshot.data![index].character)
                                     ],
                                   )

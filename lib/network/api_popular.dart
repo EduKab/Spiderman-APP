@@ -19,7 +19,7 @@ class ApiPopular {
   }
 
   Future<List<VideoPopularModel>?> getVideos(movieID) async {
-    Uri linkVideos = Uri.parse('https://api.themoviedb.org/3/movie/${movieID}/videos?api_key=5019e68de7bc112f4e4337a500b96c56&language=en-US');
+    Uri linkVideos = Uri.parse('https://api.themoviedb.org/3/movie/$movieID/videos?api_key=5019e68de7bc112f4e4337a500b96c56&language=en-US');
 
     var result = await http.get(linkVideos);
     var listJSON = jsonDecode(result.body)['results'] as List;
@@ -30,7 +30,7 @@ class ApiPopular {
   }
 
   Future<List<CreditPopularModel>?> getCredits(movieID) async {
-    Uri linkCredits = Uri.parse('https://api.themoviedb.org/3/movie/${movieID}/credits?api_key=5019e68de7bc112f4e4337a500b96c56&language=en-US');
+    Uri linkCredits = Uri.parse('https://api.themoviedb.org/3/movie/$movieID/credits?api_key=5019e68de7bc112f4e4337a500b96c56&language=en-US');
 
     var result = await http.get(linkCredits);
     var listJSON = jsonDecode(result.body)['cast'] as List;

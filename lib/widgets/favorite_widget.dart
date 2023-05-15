@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:practica1/database/database_helper.dart';
 
-import '../models/fav_movie_model.dart';
 
 class FavoriteWidget extends StatefulWidget {
   int id; 

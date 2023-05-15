@@ -30,7 +30,7 @@ class _ListPopularVideosState extends State<ListPopularVideos> {
         builder: (context, AsyncSnapshot<List<PopularModel>?> snapshot ) {
           if( snapshot.hasData ){
             return GridView.builder(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: .9,

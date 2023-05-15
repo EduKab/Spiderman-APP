@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:practica1/provider/theme_provider.dart';
 import 'package:practica1/screens/dashboard_screen.dart';
 import 'package:practica1/settings/styles_settings.dart';
@@ -13,8 +12,6 @@ class ThemeScreen extends StatefulWidget {
 }
 
 class _ThemeScreenState extends State<ThemeScreen> {
-
-  DashboardScreen dashboardScreen = const DashboardScreen();
 
   final spaceVertical = const SizedBox(
     width: 20,

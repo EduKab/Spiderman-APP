@@ -1,5 +1,3 @@
-import 'dart:async';
-import 'dart:ui';
 
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
@@ -22,13 +20,13 @@ class DetailsMarvelCharacter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Details ' + marvelModel.name.toString())),
+      appBar: AppBar(title: Text('Details ${marvelModel.name}')),
       body: SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
               opacity: 0.1,
-              image: NetworkImage('${marvelModel.thumbnail_path}' + '.${marvelModel.thumbnail_extension}'),
+              image: NetworkImage('${marvelModel.thumbnail_path}' '.${marvelModel.thumbnail_extension}'),
               fit: BoxFit.fill
             )
           ),
@@ -41,7 +39,7 @@ class DetailsMarvelCharacter extends StatelessWidget {
                   children: [
                     InstaImageViewer(
                       child: Image.network(
-                        '${marvelModel.thumbnail_path}' + '.${marvelModel.thumbnail_extension}',
+                        '${marvelModel.thumbnail_path}' '.${marvelModel.thumbnail_extension}',
                         width: 250,
                         height: 250,
                       ),
@@ -72,26 +70,26 @@ class DetailsMarvelCharacter extends StatelessWidget {
                         ? StyledText(
                           text: '<bold>DESCRIPTION:</bold> ${marvelModel.description}',
                           tags: {
-                            'bold': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                            'bold': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
                           },
                           textAlign: TextAlign.justify,
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         )
                         : StyledText(
                           text: '<bold>DESCRIPTION:</bold> <red>NO DESCRIPTION AVAILABLE :(</red>',
                           tags: {
-                            'bold': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
-                            'red': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red))
+                            'bold': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
+                            'red': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.red))
                           },
                           textAlign: TextAlign.justify,
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         )
                     ),
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+              const Padding(
+                padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -108,7 +106,7 @@ class DetailsMarvelCharacter extends StatelessWidget {
                   future: apiMarvel?.getAllComics(marvelModel.id),
                   builder: (context, AsyncSnapshot<List<MarvelComicModel>?> snapshot ){
                     if(snapshot.hasData){
-                      if (snapshot.data!.length > 0){
+                      if (snapshot.data!.isNotEmpty){
                         return SizedBox(
                           height: 250,
                           child: Swiper(
@@ -118,11 +116,11 @@ class DetailsMarvelCharacter extends StatelessWidget {
                           },
                           itemCount: snapshot.data!.length,
                           pagination: const SwiperPagination(alignment: Alignment.center, builder: SwiperPagination.fraction),
-                          control: SwiperControl()),
+                          control: const SwiperControl()),
                         );
                       }
                       else{
-                        return Column(
+                        return const Column(
                           children: [
                             Icon(Icons.block, color: Colors.red),
                             Text('NO COMIC APPAREANCES', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),),
@@ -137,8 +135,8 @@ class DetailsMarvelCharacter extends StatelessWidget {
                   }
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10 ,horizontal: 20),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 10 ,horizontal: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -152,7 +150,7 @@ class DetailsMarvelCharacter extends StatelessWidget {
                   future: apiMarvel?.getAllEvents(marvelModel.id),
                   builder: (context, AsyncSnapshot<List<MarvelEventModel>?> snapshot ){
                     if(snapshot.hasData){
-                      if (snapshot.data!.length > 0){
+                      if (snapshot.data!.isNotEmpty){
                         return SizedBox(
                           height: 280,
                           child: RawScrollbar(
@@ -171,7 +169,7 @@ class DetailsMarvelCharacter extends StatelessWidget {
                           ),
                         );
                       }else{
-                        return Column(
+                        return const Column(
                           children: [
                             Icon(Icons.block, color: Colors.red),
                             Text('NO SERIES APPEAREANCES', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),),

@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:practica1/database/database_helper.dart';
-import 'package:sqflite/sqflite.dart';
 
 import '../models/fav_movie_model.dart';
-import '../models/popular_model.dart';
-import '../network/api_popular.dart';
-import '../widgets/item_popular.dart';
 
 class ListFavoritesMovies extends StatefulWidget {
   const ListFavoritesMovies({super.key});
@@ -34,7 +28,7 @@ class _ListFavoritesMoviesState extends State<ListFavoritesMovies> {
         builder: (context, AsyncSnapshot<List<FavMovieModel>?> snapshot ) {
           if( snapshot.hasData ){
             return GridView.builder(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: .9,
@@ -43,6 +37,8 @@ class _ListFavoritesMoviesState extends State<ListFavoritesMovies> {
               ), 
               itemCount: snapshot.data != null ? snapshot.data!.length : 0,
               itemBuilder: (context, index) {
+                return null;
+              
                 //return ItemPopular(popularModel: snapshot.data![index]);
               },
             );

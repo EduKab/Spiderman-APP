@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:github_signin_promax/github_signin_promax.dart';
 import 'package:practica1/responsive.dart';
 import 'package:practica1/widgets/loading_modal_widget.dart';
+import 'package:provider/provider.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 import 'dart:ui' as ui;
+
+import '../provider/github_sign_in_provider.dart';
+import '../provider/google_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -13,6 +18,13 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
+
+  var params = GithubSignInParams(
+        clientId: 'a0c9efb3b52d632bed90',
+        clientSecret: 'bd7ab105c36dad31ce38eb641df347e8ac9290d0',
+        redirectUrl: 'https://spiderman-app-auth.firebaseapp.com/__/auth/handler',
+        scopes: 'read:user,user:email',
+  );
 
   final txtEmail = const TextField(
       decoration:
@@ -30,14 +42,8 @@ class _LoginScreenState extends State<LoginScreen> {
     height: 30,
   );
 
-  final btnGoogle = SocialLoginButton(
-      buttonType: SocialLoginButtonType.google, onPressed: () {});
-
   final btnFacebook = SocialLoginButton(
       buttonType: SocialLoginButtonType.facebook, onPressed: () {});
-
-  final btnGitHub = SocialLoginButton(
-      buttonType: SocialLoginButtonType.github, onPressed: () {});
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +58,33 @@ class _LoginScreenState extends State<LoginScreen> {
             Navigator.pushNamed(context, '/dash');
           });
         });
+
+    final btnGoogle = SocialLoginButton(
+      buttonType: SocialLoginButtonType.google, 
+      onPressed: () async {
+        final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
+        await provider.googleLogin();
+        Navigator.pushNamed(context, '/dash');
+      }
+    );
+
+    final btnGitHub = SocialLoginButton(
+      buttonType: SocialLoginButtonType.github, 
+      onPressed: () {
+        // Push [GithubSigninScreen] to perform login then get the [GithubSignInResponse]
+        Navigator.of(context).push(MaterialPageRoute(builder: (builder) {
+          return GithubSigninScreen(
+            params: params,
+            headerColor: Colors.green,
+            title: 'Login with github',
+          );
+        })).then((value) async {
+          final provider = Provider.of<GithubSignInProvider>(context, listen: false);
+          await provider.gitHubLogin(value);      
+          Navigator.pushNamed(context, '/dash');      
+        });
+      }
+    );
 
     final txtRegister = Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),

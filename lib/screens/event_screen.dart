@@ -51,10 +51,10 @@ class _EventScreen2State extends State<EventScreen2> {
       return showDialog<void>(
         context: context,
         builder: (BuildContext context) {
-          return AlertAddCalendar();
+          return const AlertAddCalendar();
         }
       );
-    };
+    }
 
     return Scaffold(
       appBar: AppBar(),
@@ -71,7 +71,7 @@ class _EventScreen2State extends State<EventScreen2> {
               : const Icon(Icons.list)
             )
           ),
-          Container(
+          const SizedBox(
             height: 700,
             width: 1000,
             child: Calendar()

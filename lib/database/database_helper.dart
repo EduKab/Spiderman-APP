@@ -1,7 +1,5 @@
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:practica1/models/event_model.dart';
-import 'package:practica1/models/popular_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -10,8 +8,8 @@ import '../models/post_model.dart';
 
 class DatabaseHelper {
   
-  static final nameDB = 'SOCIALDB5';
-  static final versionDB = 1;
+  static const nameDB = 'SOCIALDB5';
+  static const versionDB = 1;
 
   static Database? _database;
   Future<Database> get database async {
@@ -89,7 +87,7 @@ class DatabaseHelper {
 
   Future<bool> getFavorite(int idMovie) async {
     var conexion = await database;
-    var result = await conexion.rawQuery("SELECT * FROM tblFavMovie WHERE idMovie = ${idMovie}");
+    var result = await conexion.rawQuery("SELECT * FROM tblFavMovie WHERE idMovie = $idMovie");
     print(result);
     if(result.isEmpty){
       return false;
