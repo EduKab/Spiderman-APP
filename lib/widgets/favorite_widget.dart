@@ -7,9 +7,9 @@ class FavoriteWidget extends StatefulWidget {
   String title;
   String poster_path;
 
-  bool favorite;
+  bool favorite = false;
 
-  FavoriteWidget(this.id, this.title, this.favorite, this.poster_path, {super.key});
+  FavoriteWidget(this.id, this.title, this.poster_path, {super.key});
 
   @override
   State<FavoriteWidget> createState() => _FavoriteWidgetState();
@@ -21,8 +21,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
 
   @override
   Widget build(BuildContext context) {
-
-    bool isFavorite;    
+    getFavorite();
 
     return IconButton(
       onPressed: (){
@@ -30,7 +29,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
         if (widget.favorite){
           database.INSERT('tblFavMovie', {'idMovie':widget.id, 'titleMovie':widget.title, 'poster_path': widget.poster_path});
           print('favoritos:');
-          print(database.getAllFavorite());
+          print(database.getAllFavorite().toString());
         }else{
           database.deleteFavMovie('tblFavMovie', widget.id);
           print('favoritos eliminado:');
@@ -42,5 +41,12 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
         ?const Icon(Icons.favorite, color: Colors.red, size: 30)
         :const Icon(Icons.favorite_border, color: Colors.red, size: 30)
       );
+  }
+
+  getFavorite() async {
+      widget.favorite = await database.getFavorite(widget.id);
+      setState(() {
+        
+      });
   }
 }

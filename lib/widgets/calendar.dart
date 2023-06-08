@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:practica1/provider/event_provider.dart';
+import 'package:practica1/widgets/alert_edit_calendar.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+import '../database/database_helper.dart';
+import '../models/event_model.dart';
+
 class Calendar extends StatefulWidget {
-  const Calendar({super.key});
+  Calendar({super.key});
 
   @override
   State<Calendar> createState() => CalendarState();
@@ -12,47 +16,71 @@ class Calendar extends StatefulWidget {
 
 class CalendarState extends State<Calendar> {
 
-  
+  DatabaseHelper database = DatabaseHelper();
+
+  @override
+  void initState() {
+    super.initState();
+    database = DatabaseHelper();
+  }
 
   @override
   Widget build(BuildContext context) {
 
-    final events = Provider.of<EventProvider>(context).events;
+    getEvents() async {
+      final events = await database.getAllEvent();
+      print('EVENTS' + events.toList().toString());
+      return events;
+    }
 
-    return SfCalendar(
-            headerHeight: 70,
+    return FutureBuilder(
+      future: getEvents(),
+      builder: (context, AsyncSnapshot<List<EventModel>?> snapshot ) {
+          if( snapshot.hasData ){
+            return SfCalendar(
+              headerHeight: 70,
               view: CalendarView.month,
-              dataSource: MeetingDataSource(events),
-              monthViewSettings: const MonthViewSettings(showAgenda: true)
+              allowedViews: [
+                CalendarView.month,
+                CalendarView.schedule,
+              ],
+              dataSource: MeetingDataSource(snapshot.data!.toList()),
+              monthViewSettings: const MonthViewSettings(showAgenda: true),
             );
+          }else if( snapshot.hasError){
+            return const Center(child: Text('Ocurrio un error :()'),);
+          }else{
+            return const CircularProgressIndicator();
+          }
+      }
+    );
   }
-
 }
 
 class MeetingDataSource extends CalendarDataSource {
-  MeetingDataSource(List<Meeting> source){
+  MeetingDataSource(List<EventModel> source){
     appointments = source;
   }
 
   @override
   DateTime getStartTime(int index) {
-    return appointments![index].from;
+    return appointments![index].startEvent;
   }
 
   @override
   DateTime getEndTime(int index) {
-    return appointments![index].to;
+    return appointments![index].endEvent;
   }
 
   @override
   String getSubject(int index) {
-    return appointments![index].eventName;
+    return appointments![index].nameEvent;
   }
 
   @override
   Color getColor(int index) {
     final DateTime today = DateTime.now();
-    final DateTime timeEvent = DateTime(appointments![index].from.year, appointments![index].from.month, appointments![index].from.day);
+    final DateTime timeEvent = DateTime(appointments![index].startEvent.year, appointments![index].startEvent.month, appointments![index].startEvent.day);
     final DateTime startTime = DateTime(today.year, today.month, today.day);
     //print(timeEvent);
     //print(startTime);
@@ -66,7 +94,7 @@ class MeetingDataSource extends CalendarDataSource {
           return Colors.yellow;
           break;
         default:
-          return appointments![index].background;
+          return Colors.black;
       }
       
     }
@@ -74,16 +102,11 @@ class MeetingDataSource extends CalendarDataSource {
       return Colors.green;
     }
     else if(timeEvent.compareTo(startTime) < 0){
-      if(appointments![index].isAllDay){
+      if(appointments![index].compEvent == 1){
         return Colors.green;
       }
       return Colors.red;
     }
-    return appointments![index].background;
-  }
-
-  @override
-  bool isAllDay(int index) {
-    return appointments![index].isAllDay;
+    return Colors.red;
   }
 }

@@ -8,7 +8,7 @@ import '../widgets/alert_add_calendar.dart';
 
 
 class EventScreen extends StatefulWidget {
-  const EventScreen({super.key});
+  EventScreen({super.key});
 
   @override
   State<EventScreen> createState() => _EventScreenState();
@@ -36,7 +36,7 @@ class EventScreen2 extends StatefulWidget {
 }
 
 class _EventScreen2State extends State<EventScreen2> {
-  bool vistaLista = false;
+
   DatabaseHelper database = DatabaseHelper();
 
   @override
@@ -47,6 +47,7 @@ class _EventScreen2State extends State<EventScreen2> {
 
   @override
   Widget build(BuildContext context) {
+
     Future<void> _showMyDialog() async {
       return showDialog<void>(
         context: context,
@@ -57,21 +58,24 @@ class _EventScreen2State extends State<EventScreen2> {
     }
 
     return Scaffold(
-      appBar: AppBar(),
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: (){
+              database.deleteAllEvent();
+              setState(() {
+                
+              });
+            }, 
+            icon: Icon(Icons.delete)
+          )
+        ],
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[ 
-          Container(
-            alignment: Alignment.centerRight,
-            child: IconButton(
-              color: Colors.cyan,
-              onPressed: (){}, 
-              icon: vistaLista
-              ? const Icon(Icons.calendar_today)
-              : const Icon(Icons.list)
-            )
-          ),
-          const SizedBox(
+        children: [ 
+          SizedBox(
             height: 700,
             width: 1000,
             child: Calendar()
@@ -80,21 +84,7 @@ class _EventScreen2State extends State<EventScreen2> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: (){
-          /*database.INSERT(
-            'tblEvent', 
-            {
-              'nameEvent': 'Soccer Game', 
-              'descEvent': 'Play soccer with our friends :)', 
-              'dateEvent': 2023-03-27, 
-              'start': 9, 
-              'end': 11, 
-              'compEvent': 0
-            }
-          );*/
-          //print(database.getAllEvent());
           _showMyDialog();
-          final provider = Provider.of<EventProvider>(context, listen: false);
-          provider.addEvent();
         },
         label: const Text('Add Event'),
         icon: const Icon(Icons.event_note),

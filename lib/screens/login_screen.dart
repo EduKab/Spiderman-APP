@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:github_signin_promax/github_signin_promax.dart';
 import 'package:practica1/responsive.dart';
+import 'package:practica1/screens/dashboard_screen.dart';
 import 'package:practica1/widgets/loading_modal_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
@@ -47,6 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     final btnEmail = SocialLoginButton(
         buttonType: SocialLoginButtonType.generalLogin,
         onPressed: () {
@@ -55,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Future.delayed(const Duration(milliseconds: 4000)).then((value) {
             isLoading = false;
             setState(() {});
-            Navigator.pushNamed(context, '/dash');
+            //Navigator.pushNamedAndRemoveUntil(context, '/dash', ((route) => false));
           });
         });
 
@@ -64,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
       onPressed: () async {
         final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
         await provider.googleLogin();
-        Navigator.pushNamed(context, '/dash');
+        Navigator.pushNamedAndRemoveUntil(context, '/dash', ((route) => false));
       }
     );
 
@@ -81,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
         })).then((value) async {
           final provider = Provider.of<GithubSignInProvider>(context, listen: false);
           await provider.gitHubLogin(value);      
-          Navigator.pushNamed(context, '/dash');      
+          Navigator.pushNamedAndRemoveUntil(context, '/dash', ((route) => false));     
         });
       }
     );

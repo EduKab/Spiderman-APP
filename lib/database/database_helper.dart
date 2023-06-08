@@ -8,7 +8,7 @@ import '../models/post_model.dart';
 
 class DatabaseHelper {
   
-  static const nameDB = 'SOCIALDB5';
+  static const nameDB = 'SOCIALDB20';
   static const versionDB = 1;
 
   static Database? _database;
@@ -31,7 +31,7 @@ class DatabaseHelper {
   _createTables(Database db, int version) async{
     db.execute('CREATE TABLE tblPost(idPost INTEGER PRIMARY KEY, dscPost VARCHAR(200), datePost DATE)');
     db.execute('CREATE TABLE tblFavMovie(idMovie INTEGER PRIMARY KEY, titleMovie VARCHAR(50), poster_path VARCHAR(100))');
-    //db.execute('CREATE TABLE tblEvent( idEvent INTEGER PRIMARY KEY, nameEvent VARCHAR(50), descEvent VARCHAR(200), dateEvent DATE, startEvent INTEGER, endEvent INTEGER, compEvent INTEGER)');
+    db.execute('CREATE TABLE tblEvent(idEvent INTEGER PRIMARY KEY, nameEvent VARCHAR(50), startEvent String, endEvent String, compEvent INTEGER)');
   }
 
   Future<int> INSERT(String tblName, Map<String,dynamic> data) async{
@@ -65,6 +65,12 @@ class DatabaseHelper {
     return result.map((event) => EventModel.fromMap(event)).toList();
   }
 
+  Future<int> deleteAllEvent() async {
+    var conexion = await database;
+    return conexion.delete('tblEvent');
+  }
+    
+
   Future<int> updateFavMovie(String tblName, Map<String,dynamic> data) async{
     var conexion = await database;
     return conexion.update(tblName,data,
@@ -87,12 +93,15 @@ class DatabaseHelper {
 
   Future<bool> getFavorite(int idMovie) async {
     var conexion = await database;
-    var result = await conexion.rawQuery("SELECT * FROM tblFavMovie WHERE idMovie = $idMovie");
-    print(result);
-    if(result.isEmpty){
-      return false;
+    var result = await conexion.query('tblFavMovie', where: 'idMovie = $idMovie');
+    //print(result.toList());
+    //print(result.length);
+    if(result.length == 0){
+      print('falsoooo');
+      return Future.value(false);
     }
-    return true;
+    print('verdaderooo');
+    return Future.value(true);
   }
 
 }

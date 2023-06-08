@@ -7,12 +7,8 @@ class EventProvider extends ChangeNotifier{
     Meeting('Shops', DateTime(2023, 3, 27, 9, 0, 0), DateTime(2023, 3, 27, 12, 0, 0), const Color.fromARGB(255, 15, 134, 94), false)
   ];
 
-  void addEvent(){
-    events.add(Meeting('Look', DateTime(2023, 3, 24, 9, 0, 0), DateTime(2023, 3, 24, 9, 0, 0), const Color.fromARGB(255, 128, 254, 212), true));
-    events.add(Meeting('Look', DateTime(2023, 3, 25, 9, 0, 0), DateTime(2023, 3, 25, 9, 0, 0), const Color.fromARGB(255, 128, 254, 212), false));
-    events.add(Meeting('Look', DateTime(2023, 3, 28, 9, 0, 0), DateTime(2023, 3, 28, 9, 0, 0), const Color.fromARGB(255, 128, 254, 212), false));
-    events.add(Meeting('Look', DateTime(2023, 3, 29, 9, 0, 0), DateTime(2023, 3, 29, 9, 0, 0), const Color.fromARGB(255, 128, 254, 212), false));
-    events.add(Meeting('Look', DateTime(2023, 3, 30, 9, 0, 0), DateTime(2023, 3, 30, 9, 0, 0), const Color.fromARGB(255, 0, 0, 0), false));
+  void addEvent(Meeting meeting){
+    events.add(meeting);
 
     notifyListeners();
   }

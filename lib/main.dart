@@ -39,6 +39,7 @@ class PMSNApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeProvider theme = Provider.of<ThemeProvider>(context);
+    GoogleSignInProvider().googleLogout();
     return MaterialApp(
         theme: theme.getThemeData(), 
         routes: getApplicationRoutes(), 

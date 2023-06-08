@@ -37,9 +37,12 @@ class _ListFavoritesMoviesState extends State<ListFavoritesMovies> {
               ), 
               itemCount: snapshot.data != null ? snapshot.data!.length : 0,
               itemBuilder: (context, index) {
-                return null;
-              
-                //return ItemPopular(popularModel: snapshot.data![index]);
+                return FadeInImage(
+                  fit: BoxFit.fill,
+                  placeholder: const AssetImage('assets/loading.gif'), 
+                  image: NetworkImage('https://image.tmdb.org/t/p/w500/${snapshot.data![index].poster_path.toString()}'),
+                );
+                //return Container(child: Image.network('https://image.tmdb.org/t/p/w500${snapshot.data![index].poster_path.toString()}'));
               },
             );
           }else if( snapshot.hasError){

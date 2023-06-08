@@ -21,18 +21,6 @@ class DetailsMovie extends StatelessWidget {
   Widget build(BuildContext context) {
 
     print(id);
-    DatabaseHelper database = DatabaseHelper();
-    Future<bool> result = database.getFavorite(id);
-    bool isFavorite;
-    print(result);
-
-    if(result != []){
-      print('falso');
-      isFavorite = false;
-    }else{
-      print('verdadero');
-      isFavorite = true;
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -52,7 +40,7 @@ class DetailsMovie extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  FavoriteWidget(id, title!, isFavorite, poster_path!)
+                  FavoriteWidget(id, title!, poster_path!)
                 ],
               ),
               Padding(
@@ -248,5 +236,7 @@ class DetailsMovie extends StatelessWidget {
         ),
       ),
     );
+
+    
   }
 }

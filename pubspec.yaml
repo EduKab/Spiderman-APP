@@ -60,6 +60,7 @@ dependencies:
   page_transition: ^2.0.9
   insta_image_viewer: ^1.0.2
   # vertical_card_pager: ^1.5.0
+  datetime_picker_formfield_new: ^2.1.0
 
   firebase_auth: ^4.5.0
   google_sign_in: ^6.1.0

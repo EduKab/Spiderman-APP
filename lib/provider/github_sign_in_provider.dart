@@ -12,4 +12,8 @@ class GithubSignInProvider extends ChangeNotifier {
 
     await auth.signInWithCredential(credential);
   }
+
+  Future githubLogout() async {
+    await FirebaseAuth.instance.signOut();
+  }
 }

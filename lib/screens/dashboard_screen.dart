@@ -123,8 +123,9 @@ class DashBoardScreenState extends State<DashboardScreen>{
                     title: const Text('Exit'),
                     subtitle: const Text('Close profile'),
                     onTap: () {
-                      FirebaseAuth.instance.signOut();
-                      Navigator.pop(context);
+                      GoogleSignInProvider provider = Provider.of<GoogleSignInProvider>(context, listen: false);
+                      provider.googleLogout();
+                      Navigator.pushNamedAndRemoveUntil(context, '/login', ((route) => false));
                     },
                     leading: const Icon(Icons.close_rounded, color: Colors.red,),
                     trailing: const Icon(Icons.chevron_right),
